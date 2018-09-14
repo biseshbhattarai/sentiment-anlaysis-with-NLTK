@@ -23,7 +23,7 @@ class Test(db.Model):
 
 @app.route("/")
 def home():
-    return "Hello World!"
+    return render_template('home.html')
 
 class TestForm(Form):
     name = StringField('Name', [validators.Length(min=1, max=200)])
@@ -38,7 +38,7 @@ def getform():
     if request.method == 'POST' and form.validate():
         test = Test(name=form.name.data, data=form.data.data)
         data = form.data.data
-        flash('Success ! , Wait for a while dude', 'success')
+        # flash('Success ! , Wait for a while dude', 'success')
         print(s.sentiment(data))
         db.session.add(test)
         db.session.commit()
