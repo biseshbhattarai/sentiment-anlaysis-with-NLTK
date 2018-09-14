@@ -39,10 +39,12 @@ def getform():
         test = Test(name=form.name.data, data=form.data.data)
         data = form.data.data
         # flash('Success ! , Wait for a while dude', 'success')
+        
         print(s.sentiment(data))
+        
         db.session.add(test)
         db.session.commit()
-        print('Wait for a minute')
+        print('Hell Yeah ! It works')
         return redirect(url_for('home'))
     print('Working in it......')
     return render_template('test.html', form=form)
