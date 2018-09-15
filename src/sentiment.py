@@ -9,7 +9,7 @@ from sklearn.svm import SVC, LinearSVC, NuSVC
 from nltk.classify import ClassifierI
 from statistics import mode
 from nltk.tokenize import word_tokenize
-
+from server.server import pos_data, neg_data
 
 
 class VoteClassifier(ClassifierI):
@@ -35,6 +35,22 @@ class VoteClassifier(ClassifierI):
     
 short_pos = open("short_reviews/positive.txt","r").read()
 short_neg = open("short_reviews/negative.txt","r").read()
+# print(data)
+for j in pos_data:
+    if j in short_pos:
+        pass
+    else:
+        data_f = open('short_reviews/positive.txt', 'a')
+        data_f.write(j)
+        data_f.close
+
+for k in neg_data:
+    if k in short_neg:
+        pass
+    else:
+        data_f = open('short_reviews/negative.txt', 'a')
+        data_f.write(k)
+        data_f.close()
 
 # move this up here
 all_words = []
@@ -66,7 +82,7 @@ for p in short_neg.split('\n'):
 
 
 
-save_documents = open("pickled_algos/documents.pickle","wb")
+save_documents = open("server/pickled_algos/documents.pickle","wb")
 pickle.dump(documents, save_documents)
 save_documents.close()
 
@@ -77,7 +93,7 @@ all_words = nltk.FreqDist(all_words)
 word_features = list(all_words.keys())[:5000]
 
 
-save_word_features = open("pickled_algos/word_features5k.pickle","wb")
+save_word_features = open("server/pickled_algos/word_features5k.pickle","wb")
 pickle.dump(word_features, save_word_features)
 save_word_features.close()
 
@@ -104,7 +120,7 @@ print("Original Naive Bayes Algo accuracy percent:", (nltk.classify.accuracy(cla
 classifier.show_most_informative_features(15)
 
 ###############
-save_classifier = open("pickled_algos/originalnaivebayes5k.pickle","wb")
+save_classifier = open("server/pickled_algos/originalnaivebayes5k.pickle","wb")
 pickle.dump(classifier, save_classifier)
 save_classifier.close()
 
@@ -128,7 +144,7 @@ LogisticRegression_classifier = SklearnClassifier(LogisticRegression())
 LogisticRegression_classifier.train(training_set)
 print("LogisticRegression_classifier accuracy percent:", (nltk.classify.accuracy(LogisticRegression_classifier, testing_set))*100)
 
-save_classifier = open("pickled_algos/LogisticRegression_classifier5k.pickle","wb")
+save_classifier = open("server/pickled_algos/LogisticRegression_classifier5k.pickle","wb")
 pickle.dump(LogisticRegression_classifier, save_classifier)
 save_classifier.close()
 
@@ -137,7 +153,7 @@ LinearSVC_classifier = SklearnClassifier(LinearSVC())
 LinearSVC_classifier.train(training_set)
 print("LinearSVC_classifier accuracy percent:", (nltk.classify.accuracy(LinearSVC_classifier, testing_set))*100)
 
-save_classifier = open("pickled_algos/LinearSVC_classifier5k.pickle","wb")
+save_classifier = open("server/pickled_algos/LinearSVC_classifier5k.pickle","wb")
 pickle.dump(LinearSVC_classifier, save_classifier)
 save_classifier.close()
 

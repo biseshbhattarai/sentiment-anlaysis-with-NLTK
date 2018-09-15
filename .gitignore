@@ -1,2 +1,5 @@
 /src/server/pickled_algos/*
 /src/server/server.pyc
+/src/server/__init__.pyc
+/src/__init__.pyc
+/src/server/static/jquery-cookie/*

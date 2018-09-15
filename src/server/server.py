@@ -43,7 +43,15 @@ def getform():
         # flash('Success ! , Wait for a while dude', 'success')
         
         print(s.sentiment(data))
-        
+        data = s.sentiment(data)
+        if data == ('pos', 100.0):
+            pos_data = data
+            print('It is a postive text')
+        elif data == ('neg', 100.0):
+            print('It is a negative text')
+            neg_data = data
+        else:
+            print('WTF was that!! :(')
         db.session.add(test)
         db.session.commit()
         print('Hell Yeah ! It works')
