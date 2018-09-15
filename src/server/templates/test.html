@@ -20,5 +20,27 @@
         <hr>
         <button type="submit" class="btn btn-success">Submit</button>
     </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='jquery-cookie/src/jquery.cookie.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $('button').click(function(){
+                console.log(localStorage.getItem('ip'))
+
+                $.getJSON("http://jsonip.com/?callback=?", function (data) {
+                console.log(data);
+                if(data.ip === localStorage.getItem('ip')){
+                    alert('Thank you for posting again...')
+                }
+                // localStorage.setItem('ip', data.ip)
+                
+            })
+        })
+    });
+    
+
+    </script>
 </body>
 </html>

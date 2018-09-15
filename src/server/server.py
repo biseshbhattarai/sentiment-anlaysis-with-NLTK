@@ -6,12 +6,14 @@ from wtforms import StringField, PasswordField, validators, SubmitField, TextAre
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 import sentiment_mod as s
 
+# pip install flask_sqlalchemy
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
 db = SQLAlchemy(app)
-
+#ORM (object relational mapping )
 class Test(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), nullable=False)
@@ -45,7 +47,7 @@ def getform():
         db.session.add(test)
         db.session.commit()
         print('Hell Yeah ! It works')
-        return redirect(url_for('home'))
+        # return redirect(url_for('home'))
     print('Working in it......')
     return render_template('test.html', form=form)
 
